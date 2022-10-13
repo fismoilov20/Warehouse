@@ -8,17 +8,17 @@ class Product(models.Model):
     quantity  = models.PositiveIntegerField()
     price = models.PositiveIntegerField()
     units = models.CharField(max_length=50)
-    income_date = models.DateField(auto_now_add=True)
+    income_date = models.DateField(auto_now_add=True, null=True)
     salesman = models.ForeignKey(Salesman, on_delete=models.SET_NULL, null=True)            # FK
     def __str__(self) -> str:
         return f"{self.title}, {self.brand}"
 
 class Client(models.Model):
     name = models.CharField(max_length=30)
-    title = models.CharField(max_length=30)
-    tel = models.CharField(max_length=30)
+    shop_name = models.CharField(max_length=30)
+    phone = models.CharField(max_length=30)
     address = models.CharField(max_length=50)
     debt = models.PositiveSmallIntegerField(default=0)
     salesman = models.ForeignKey(Salesman, on_delete=models.SET_NULL, null=True)            # FK
     def __str__(self) -> str:
-        return f"{self.name}, {self.title}({self.address})"
+        return f"{self.name}, {self.shop_name}({self.address})"

@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     'statsapp',
 ]
 
+
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',

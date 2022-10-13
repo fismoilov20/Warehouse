@@ -139,16 +139,17 @@
                         </tr>
                     </thead>
                     <tbody>
+                      {% for i in clients %}
                         <tr>
-                          {% for i in clients %}
                             <th scope="row">{{forloop.counter}}.</th>
                             <td>{{i.name}}</td>
-                            <td>{{i.title}}</td>
-                            <td>+{{i.tel}}</td>
+                            <td>{{i.shop_name}}</td>
+                            <td>+{{i.phone}}</td>
                             <td>{{i.address}}</td>
-                            <td><a href="#"><button type="submit" class="btn btn-danger" data-toggle="modal">Tahrirlash</button></a></td>
-                          {% endfor %}
+                            <td><a href="/clients/edit/{{i.id}}"><button type="submit" class="btn btn-danger" data-toggle="modal">Edit</button></a></td>
+                            <td><a href="/clients/delete/{{i.id}}"><button type="submit" class="btn btn-danger" data-toggle="modal">Delete</button></a></td>
                         </tr>
+                      {% endfor %}
                     </tbody>
                 </table>
             </div>

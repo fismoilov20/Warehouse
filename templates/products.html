@@ -9,11 +9,11 @@
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome Icons -->
-  <link rel="stylesheet" href="static/plugins/fontawesome-free/css/all.min.css">
+  <link rel="stylesheet" href="/static/plugins/fontawesome-free/css/all.min.css">
   <!-- IonIcons -->
   <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
   <!-- Theme style -->
-  <link rel="stylesheet" href="static/dist/css/adminlte.min.css">
+  <link rel="stylesheet" href="/static/dist/css/adminlte.min.css">
 
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -56,8 +56,8 @@
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="../index.html" class="brand-link">
-      <img src="static/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+    <a href="/" class="brand-link">
+      <img src="/static/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
       <span class="brand-text font-weight-light">Online Ombor</span>
     </a>
 
@@ -66,7 +66,7 @@
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
-          <img src="static/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+          <img src="/static/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
           <a href="#" class="d-block">Felix</a>
@@ -142,16 +142,19 @@
                         </tr>
                     </thead>
                     <tbody>
+                      {% for i in products %}
                         <tr>
-                          {% for i in products %}
                             <th scope="row">{{forloop.counter}}</th>
                             <td>{{i.title}}</td>
                             <td>{{i.brand}}</td>
                             <td>{{i.price}}</td>
                             <td>{{i.quantity}}</td>
                             <td><a href="#"><button type="submit" class="btn btn-danger" data-toggle="modal">Tahrirlash</button></a></td>
-                          {% endfor %}
+                            {% if request.user.is_staff %}
+                            <td><a href="/products/delete/{{i.id}}"><button type="submit" class="btn btn-danger" data-toggle="modal">Delete</button></a></td>
+                            {% endif %}
                         </tr>
+                      {% endfor %}
                     </tbody>
                 </table>
             </div>
@@ -170,19 +173,22 @@
           </div>
     
           <!-- Modal body -->
-          <form action="#" id="new-product-form" >
+          <form method="post" action="/products/" id="new-product-form" >{% csrf_token %}
             <div class="modal-body">
               <label for="new-product-name">Nomi:</label>
               <input type="text" name="pr_name" placeholder="Mahsulot nomi..." id="new-product-name" class="form-control" required>
               <br>
-              <label for="new-product-name">Brend:</label>
-              <input type="text" name="pr_brand" placeholder="Mahsulot brendi..." id="new-product-brend" class="form-control" required>
+              <label for="new-product-brand">Brend:</label>
+              <input type="text" name="pr_brand" placeholder="Mahsulot brendi..." id="new-product-brand" class="form-control" required>
               <br>
-              <label for="new-product-name">Narxi:</label>
+              <label for="new-product-price">Narxi:</label>
               <input type="text" name="pr_price" placeholder="Maxsulot narxi..." id="new-product-price" class="form-control" required>
               <br>
-              <label for="new-product-name">Miqdori:</label>
+              <label for="new-product-amount">Miqdori:</label>
               <input type="number" name="pr_amount" placeholder="Mahsulot miqdori..." id="new-product-amount" class="form-control" required>
+              <br>
+              <label for="new-product-units">O'lchov:</label>
+              <input type="text" name="pr_units" id="new-product-units" class="form-control" required>
               <br>
             </div>
     
@@ -201,17 +207,17 @@
 <!-- REQUIRED SCRIPTS -->
 
 <!-- jQuery -->
-<script src="static/plugins/jquery/jquery.min.js"></script>
+<script src="/static/plugins/jquery/jquery.min.js"></script>
 <!-- Bootstrap -->
-<script src="static/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="/static/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- AdminLTE -->
-<script src="static/dist/js/adminlte.js"></script>
+<script src="/static/dist/js/adminlte.js"></script>
 
 <!-- OPTIONAL SCRIPTS -->
-<script src="static/plugins/chart.js/Chart.min.js"></script>
+<script src="/static/plugins/chart.js/Chart.min.js"></script>
 <!-- AdminLTE for demo purposes -->
-<script src="static/dist/js/demo.js"></script>
+<script src="/static/dist/js/demo.js"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-<script src="static/dist/js/pages/dashboard3.js"></script>
+<script src="/static/dist/js/pages/dashboard3.js"></script>
 </body>
 </html>

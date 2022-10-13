@@ -8,7 +8,6 @@ class Salesman(models.Model):
     title = models.CharField(max_length=50)
     address = models.CharField(max_length=50)
     tel = models.CharField(max_length=50)
-    user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)            # FK
-    task = models.CharField(max_length=40, blank=True)
+    user = models.ManyToManyField(User, null=True)            # FK
     def __str__(self) -> str:
         return f"{self.name}, {self.title}({self.address})"
