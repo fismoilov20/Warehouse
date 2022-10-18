@@ -5,7 +5,7 @@ from userapp.models import *
 class Product(models.Model):
     title = models.CharField(max_length=50)
     brand = models.CharField(max_length=50)
-    quantity  = models.PositiveIntegerField()
+    amount  = models.PositiveIntegerField()
     price = models.PositiveIntegerField()
     units = models.CharField(max_length=50)
     income_date = models.DateField(auto_now_add=True, null=True)

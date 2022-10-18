@@ -78,7 +78,7 @@
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <li class="nav-header">Menu</li>
           <li class="nav-item">
-            <a href="stats" class="nav-link">
+            <a href="/stats" class="nav-link">
               <i class="nav-icon far fa-circle text-warning"></i>
               <p>Statistics</p>
             </a>
@@ -127,6 +127,10 @@
             <div class="card-header border-0">
                 <div class="d-flex justify-content-between">
                   <button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Maxsulot qo'shish</button>
+                  <form action="/products/" method="get">
+                    <input name="search" type="text">
+                    <button type="submit">Search</button>
+                  </form>
                 </div>
             </div>
             <div class="card-body">
@@ -138,7 +142,7 @@
                             <th scope="col" style="text-align: center;">Brendi</th>
                             <th scope="col" style="text-align: center;">Narxi</th>
                             <th scope="col" style="text-align: center;">Miqdori</th>
-                            <th scope="col" style="text-align: center;"></th>
+                            <th scope="col" style="text-align: center;">O'lchov</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -148,8 +152,9 @@
                             <td>{{i.title}}</td>
                             <td>{{i.brand}}</td>
                             <td>{{i.price}}</td>
-                            <td>{{i.quantity}}</td>
-                            <td><a href="#"><button type="submit" class="btn btn-danger" data-toggle="modal">Tahrirlash</button></a></td>
+                            <td>{{i.amount}}</td>
+                            <td>{{i.units}}</td>
+                            <td><a href="/products/edit/{{i.id}}"><button type="submit" class="btn btn-danger" data-toggle="modal">Edit</button></a></td>
                             {% if request.user.is_staff %}
                             <td><a href="/products/delete/{{i.id}}"><button type="submit" class="btn btn-danger" data-toggle="modal">Delete</button></a></td>
                             {% endif %}
