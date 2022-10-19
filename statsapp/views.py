@@ -24,17 +24,19 @@ class StatsView(View):
         return render(request, 'stats.html', data)
 
     def post(self, request):
-        dbt = Statistics.objects.filter(client=Client.objects.get(id=request.POST.get('client'))).last()
         Statistics.objects.create(
             product=Product.objects.get(id=request.POST.get('product')),
             client=Client.objects.get(id=request.POST.get('client')),
-            salesman=Salesman.objects.get(id=request.POST.get('salesman')),
+            salesman=Salesman.objects.get(user=request.user),
             amount=request.POST.get('amount'),
             total=request.POST.get('total'),
-            debt=int(request.POST.get('debt')) + dbt.debt,
+            debt=request.POST.get('debt'),
             payed=request.POST.get('payed'),
         )
-        
+        clt = Client.objects.get(id=request.POST.get('client'))
+        clt.debt += int(request.POST.get('debt'))
+        clt.save()
+
         amt = Product.objects.get(id=request.POST.get('product'))
         amt.amount -= int(request.POST.get('amount'))
         amt.save()

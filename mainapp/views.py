@@ -17,7 +17,6 @@ class ProductsView(View):
                 products = products.filter(
                     title__contains=search) | products.filter(
                     brand__contains=search) | products.filter(
-                    salesman__name__contains=search
                 )
                 
             data = {
@@ -48,7 +47,6 @@ class ClientsView(View):
                 clients = clients.filter(
                     name__contains=search) | clients.filter(
                     shop_name__contains=search) | clients.filter(
-                    salesman__name__contains=search
                 )
                 
             data = {
