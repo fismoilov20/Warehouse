@@ -18,4 +18,4 @@ class LoginView(View):
 class LogoutView(View):
     def get(self,request):
         logout(request)
-        return redirect('/')                ## using name of url
+        return redirect('/')               
